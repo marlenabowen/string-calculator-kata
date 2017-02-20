@@ -20,17 +20,20 @@ describe('<StringCalculator />', () => {
   });
 
   context('where new lines are the only delimeters', () => {
-    expect(StringCalculator.calculate("3\n2\n10")).to.eq(15);
+    it('sums the numbers correctly', () => {
+      expect(StringCalculator.calculate("3\n2\n10")).to.eq(15);
+    });
   });
 
-  // context('where anything can be a delimeter', () => {
-  //   expect(StringCalculator.calculate("//;n1;2")).to.eq(3);
-  //   expect(StringCalculator.calculate("3/4/3")).to.eq(10);
-  // });
-  //
-  // context('where negative numbers are included', () => {
-  //   it('throws an exception', () => {
-  //     expect(StringCalculator.calculate("-2,-4")).to.eq("negatives not allowed: -2, -4");
-  //   });
-  // });
+  context('where anything can be a delimeter', () => {
+    it('sums the numbers correctly', () => {
+      expect(StringCalculator.calculate("3;n14/3")).to.eq(20);
+    });
+  });
+
+  context('where negative numbers are included', () => {
+    it('throws an exception', () => {
+      expect(StringCalculator.calculate("-21,12,-4,3")).to.eq("negatives not allowed: -21,-4");
+    });
+  });
 });

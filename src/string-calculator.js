@@ -3,25 +3,27 @@
 export default class StringCalculator {
   static calculate(n) {
     if (n) {
-      return this.add(n);
+      return this.checkForNegatives(n);
     } else {
       return 0;
     }
   }
 
-  static removeDelimeter(n) {
-    let delimeter = '';
-    if (n.includes(',')) {
-      delimeter = ',';
-    } else if (n.includes('\n')) {
-      delimeter = '\n';
+  static checkForNegatives(n) {
+    if (n.includes('-')) {
+      const negatives = n.match(/(-)\d+/g);
+      return "negatives not allowed: " + negatives;
+    } else {
+      return this.removeDelimeter(n);
     }
-    const array = n.split(delimeter);
-    return array;
   }
 
-  static add(n) {
-    const array = this.removeDelimeter(n);
+  static removeDelimeter(n) {
+    const array = n.match(/\d+/g);
+    return this.sum(array);
+  }
+
+  static sum(array) {
     let result = 0;
 
     array.forEach((number) => {
