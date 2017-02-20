@@ -3,32 +3,36 @@
 export default class StringCalculator {
   static calculate(n) {
     if (n) {
-      return this.checkForNegatives(n);
+      return this.sum(n);
     } else {
       return 0;
     }
   }
 
-  static checkForNegatives(n) {
-    if (n.includes('-')) {
+  static sum(n) {
+    if (this.containsNegatives(n)) {
       const negatives = n.match(/(-)\d+/g);
       return "negatives not allowed: " + negatives;
     } else {
-      return this.removeDelimeter(n);
+      const array = this.removeDelimeter(n);
+      let result = 0;
+
+      array.forEach((number) => {
+        result += parseInt(number);
+      });
+      return result;
+    }
+  }
+
+  static containsNegatives(n) {
+    if (n.includes('-')) {
+      return true;
+    } else {
+      return false;
     }
   }
 
   static removeDelimeter(n) {
-    const array = n.match(/\d+/g);
-    return this.sum(array);
-  }
-
-  static sum(array) {
-    let result = 0;
-
-    array.forEach((number) => {
-      result += parseInt(number);
-    });
-    return result;
+    return n.match(/\d+/g);
   }
 }
