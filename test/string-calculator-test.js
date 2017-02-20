@@ -33,7 +33,7 @@ describe('<StringCalculator />', () => {
 
   context('where negative numbers are included', () => {
     it('throws an exception', () => {
-      expect(StringCalculator.calculate("-21,12,-4,3")).to.eq("negatives not allowed: -21,-4");
+      expect(() => StringCalculator.calculate("-21,12,-4,3")).to.throw("negatives not allowed: -21,-4");
     });
   });
 });
