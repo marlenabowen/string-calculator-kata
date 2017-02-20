@@ -1,38 +1,37 @@
 'use strict';
 
 export default class StringCalculator {
-  static calculate(n) {
-    if (n) {
-      return this.sum(n);
+  static calculate(string) {
+    if (string) {
+      return this.sum(string);
     } else {
       return 0;
     }
   }
 
-  static sum(n) {
-    if (this.containsNegatives(n)) {
-      const negatives = n.match(/(-)\d+/g);
-      return "negatives not allowed: " + negatives;
+  static sum(string) {
+    if (this.containsNegatives(string)) {
+      return "negatives not allowed: " + string.match(/(-)\d+/g);
     } else {
-      const array = this.removeDelimeter(n);
-      let result = 0;
+      const numbers = this.removeDelimeter(string);
+      let sum = 0;
 
-      array.forEach((number) => {
-        result += parseInt(number);
+      numbers.forEach((number) => {
+        sum += parseInt(number);
       });
-      return result;
+      return sum;
     }
   }
 
-  static containsNegatives(n) {
-    if (n.includes('-')) {
+  static containsNegatives(string) {
+    if (string.includes('-')) {
       return true;
     } else {
       return false;
     }
   }
 
-  static removeDelimeter(n) {
-    return n.match(/\d+/g);
+  static removeDelimeter(string) {
+    return string.match(/\d+/g);
   }
 }
