@@ -3,16 +3,14 @@
 export default class StringCalculator {
   static calculate(string) {
     if (string) {
-      return this.checkForNegatives(string);
+      return this.sum(string);
     } else {
       return 0;
     }
   }
 
-  static checkForNegatives(string) {
-    if (string.includes('-')) {
-      throw new Error("negatives not allowed: " + string.match(/(-)\d+/g));
-    } else {
+  static sum(string) {
+    if (!this.containsNegatives(string)) {
       const numbers = this.removeDelimeter(string);
       let sum = 0;
 
@@ -20,6 +18,14 @@ export default class StringCalculator {
         sum += parseInt(number);
       });
       return sum;
+    }
+  }
+
+  static containsNegatives(string) {
+    if (string.includes('-')) {
+      throw new Error("negatives not allowed: " + string.match(/(-)\d+/g));
+    } else {
+      return false;
     }
   }
 
